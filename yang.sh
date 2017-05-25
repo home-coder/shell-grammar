@@ -71,4 +71,23 @@ echo $len
 for var in ${path}/*.sh; do
 	file=${var:len}
 	echo $file
+	if [ $file != yang.sh ]; then
+		mv $file change$file
+	fi
 done
+
+echo "################################"
+str="love you jingjing"
+for i in `seq ${#str}`; do
+	echo ${str:$i-1;1}
+done
+
+str="hello world"
+len=${#str}
+for ((i=0; i < ${len}; i++)); do
+	echo "${str:i:1}"
+done
+echo "################################"
+string="23456789"
+echo ${string}
+echo ${#string}
