@@ -132,6 +132,13 @@ for var in ${map[*]}; do
 	echo "map = ${var}"
 done
 
+len=${#map}
+echo ${len}
+for ((i = 0; i < ${len}; i++)); do
+	echo ${map[i]}
+done
+
+echo "#####################################"
 am=3
 if [[ ${am} -ne 3 ]]; then
 	echo "${am} != 3"
@@ -145,4 +152,25 @@ if [[ -e ${file2} ]]; then
 	echo "exist file2"
 fi
 
+strarry=(
+	and android output
+)
+echo ${strarry[*]}
 
+function print_android() {
+	echo "print android" "${strarry[*]}"
+}
+
+function print_kernel() {
+	echo "print kernel"
+	print_android ${strarry[*]}
+}
+
+case $1 in
+android)
+print_android
+;;
+kernel)
+print_kernel ${strarry[*]}
+;;
+esac
