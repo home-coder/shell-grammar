@@ -254,13 +254,16 @@ pathall=(
 	${path3}
 )
 
+compfile="yang.sh"
 for var in ${pathall[*]}; do
 	for filesh in ${var}/*.sh; do
 		echo ${filesh}
 		file=${filesh:$(expr ${#var} + 1)}
 		echo ${file}
-		if [[ ${filesh} = "yang.sh" ]]; then
-			echo ${var}/yang.sh
+		if [[ ${file} = ${compfile} ]]; then
+			echo ======${var}/yang.sh
+		else
+			echo ======not find======
 		fi
 	done
 done
@@ -282,4 +285,6 @@ for var in ${path}/*.sh; do
 		mv $file change$file
 	fi
 done
+
+echo =================替换命令 again========================
 
