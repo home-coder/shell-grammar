@@ -195,4 +195,16 @@ while read line; do
 	fi
 done < $1
 
+echo "单个数组元素的长度"
+arry=(
+	hello
+	nihao
+	llist
+	struct
+)
+
+n=0
+for var in ${arry[*]}; do
+	echo ${var} size is ${#arry[n++]}
+done
 
