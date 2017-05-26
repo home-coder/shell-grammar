@@ -208,3 +208,24 @@ for var in ${arry[*]}; do
 	echo ${var} size is ${#arry[n++]}
 done
 
+echo ===========function again====================
+arry=(
+	hello
+	798uiddd
+	mstarlianfake
+	witchisyourlove
+)
+
+function print_str() {
+	echo $1
+}
+
+i=0
+for var in ${arry[*]}; do
+	len=${#arry[i++]}
+	case ${len} in
+		8)
+		print_str ${arry[i-1]}
+		;;
+	esac
+done
