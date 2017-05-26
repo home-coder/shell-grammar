@@ -92,15 +92,57 @@ string="23456789"
 echo ${string}
 echo ${#string}
 
-echo "##########  判断str 是否为空#####################"
+echo "##########  判断str 是否为空, 为什么加双中括号 [[ ]] #####################"
 str="have a string"
-if [ str ]; then
+if [[ ${str} ]]; then
 	echo "have"
 else
 	echo "not have"
 fi
+str2="haveastring"
+if [ ${str2} ]; then
+	echo "str2 exist"
+else
+	echo "str2 not exist"
+fi
 
+echo "##########  判断文件是否存在######################"
+file="/home/jiangxiujie/basic/shell-grammar/yang.sh"
+if [ -e ${file} ]; then
+	echo "file exist"
+else
+	echo "file not exist"
+fi
 
+echo "#########shell 中的各种括号() (()) [] [[]] {}"
+(
+	str="this string"
+	var=4
+	echo ${var}
+)
+echo ${str}
+echo ${var}
 
+map=(
+	"abc"
+	"desc"
+)
+
+for var in ${map[*]}; do
+	echo "map = ${var}"
+done
+
+am=3
+if [[ ${am} -ne 3 ]]; then
+	echo "${am} != 3"
+else
+	echo '${am} == 3'
+fi
+
+#file exist ?
+file2="/home/jiangxiujie/basic/shell-grammar/yang.sh"
+if [[ -e ${file2} ]]; then
+	echo "exist file2"
+fi
 
 
