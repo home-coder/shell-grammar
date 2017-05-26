@@ -91,3 +91,16 @@ echo "################################"
 string="23456789"
 echo ${string}
 echo ${#string}
+
+echo "##########  判断str 是否为空#####################"
+str="have a string"
+if [ str ]; then
+	echo "have"
+else
+	echo "not have"
+fi
+
+
+
+
+
