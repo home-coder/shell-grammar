@@ -229,3 +229,57 @@ for var in ${arry[*]}; do
 		;;
 	esac
 done
+
+echo ============dir ops======================
+for var in `ls`; do
+	if [[ -d ${var} ]]; then
+		cd ${var}
+		ls
+		cd -
+	fi
+done
+
+echo ===========google *.sh================
+
+path1="/home/java/daycode/shell-grammar"
+path2="/home/java/daycode/shell-command"
+path3="/home/java/daycode/shell-symbol"
+
+len=$(expr ${#path1} + 1)
+echo ${len}
+
+pathall=(
+	${path1}
+	${path2}
+	${path3}
+)
+
+for var in ${pathall[*]}; do
+	for filesh in ${var}/*.sh; do
+		echo ${filesh}
+		file=${filesh:$(expr ${#var} + 1)}
+		echo ${file}
+		if [[ ${filesh} = "yang.sh" ]]; then
+			echo ${var}/yang.sh
+		fi
+	done
+done
+
+path="/home/java/daycode/shell-grammar"
+for var in ${path}/*.sh; do
+	echo $var
+done
+
+#请思考 ${path}/*.sh 代表什么， 一定要把这个东西考虑清楚了，说明白了
+path="/home/java/daycode/shell-grammar"
+len=`expr ${#path} + 1`
+echo $len
+for var in ${path}/*.sh; do
+	echo $var #/home/java/daycode/shell-grammar/*.sh
+	file=${var:len}
+	echo $file
+	if [ $file != yang.sh ]; then
+		mv $file change$file
+	fi
+done
+
