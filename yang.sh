@@ -174,3 +174,25 @@ kernel)
 print_kernel ${strarry[*]}
 ;;
 esac
+
+
+echo "===========按行读取=================="
+while read line; do
+	echo $line
+done < $1
+
+while read line; do
+	flag=0
+	for var in $line; do
+#		echo ${var}
+		if [[ ${var} = "function" ]]; then
+			flag=1
+			break
+		fi
+	done
+	if [[ $flag -eq 1 ]]; then
+		echo $line
+	fi
+done < $1
+
+
