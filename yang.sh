@@ -318,5 +318,10 @@ while read line; do
 		break
 	fi
 	check_line_isip $line
+	break
 done
 
+
+echo ================declare =============
+declare -i time_stop_s=$(date +%s)
+echo ${time_stop}
