@@ -286,5 +286,35 @@ for var in ${path}/*.sh; do
 	fi
 done
 
-echo =================替换命令 again========================
+echo '=================替换命令(将结果值保存在左值 如$(), ``两个作用相同) again================='
+
+
+echo ============ip test, 1.shell使用数组中的元素 2. 如何使用gawk===============
+pall=(
+	p1 p2 p3 p4
+)
+
+function check_line_isip() {
+	${pall[0]}=`echo $1 |gawk -F'.' '{print $1}'`
+	${pall[1]}=`echo $1 |gawk -F'.' '{print $2}'`
+	$p3=`echo $1 |gawk -F'.' '{print $3}'`
+	$p4=`echo $1 |gawk -F'.' '{print $4}'`
+	echo "$p1 $p2 $p3 $p4"
+	flag=0
+	for var in ${pall[*]}; do
+		echo $var
+		if [[ ${var} > 255 || ${var} < 0 ]]; then
+			echo "it is not ip, a correct ip like 192.168.112.206"
+		else
+			flag++
+		fi
+	done
+}
+
+while read line; do
+	if [[ $line = 'q' ]]; then
+		break
+	fi
+	check_line_isip $line
+done
 
