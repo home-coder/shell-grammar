@@ -290,25 +290,27 @@ echo '=================替换命令(将结果值保存在左值 如$(), ``两个
 
 
 echo ============ip test, 1.shell使用数组中的元素 2. 如何使用gawk===============
-pall=(
-	p1 p2 p3 p4
-)
 
+#egre = grep -E, 
 function check_line_isip() {
-	${pall[0]}=`echo $1 |gawk -F'.' '{print $1}'`
-	${pall[1]}=`echo $1 |gawk -F'.' '{print $2}'`
-	$p3=`echo $1 |gawk -F'.' '{print $3}'`
-	$p4=`echo $1 |gawk -F'.' '{print $4}'`
-	echo "$p1 $p2 $p3 $p4"
+if echo $1 |egrep -q '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$' ; then
+	pall[0]=`echo $1 |gawk -F'.' '{print $1}'`
+	pall[1]=`echo $1 |gawk -F'.' '{print $2}'`
+	pall[2]=`echo $1 |gawk -F'.' '{print $3}'`
+	pall[3]=`echo $1 |gawk -F'.' '{print $4}'`
+	echo "${pall[0]} ${pall[1]} ${pall[2]} ${pall[3]}"
 	flag=0
 	for var in ${pall[*]}; do
-		echo $var
-		if [[ ${var} > 255 || ${var} < 0 ]]; then
+		if [[ ${var} -gt 255 || ${var} -lt 0 ]]; then
 			echo "it is not ip, a correct ip like 192.168.112.206"
 		else
-			flag++
+			flag=$(expr $flag + 1)
 		fi
 	done
+	if [[ $flag -eq 4 ]]; then
+		echo "$1 is a correct ip"
+	fi
+fi
 }
 
 while read line; do
