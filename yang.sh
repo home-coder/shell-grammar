@@ -321,6 +321,30 @@ while read line; do
 	break
 done
 
+echo ===============checkip again after 端午================
+function checkip_again() {
+	slip=(
+		$(echo $1 | gawk -F '.' '{for(i=1; i<=NF; i++) print $i}')
+	)
+	flag=0
+	for var in ${slip[*]}; do
+		if [[ $var -gt 255 || $var -lt 0 ]]; then
+			echo "not a valid ip"
+			break
+		fi
+		flag=$(expr $flag + 1)
+	done
+	if [[ $flag -eq 4 ]]; then
+		echo "is a valid ip"
+	fi
+}
+
+while read line; do
+	if [[ ${line} = "q" ]]; then
+		break
+	fi
+	checkip_again $line
+done
 
 echo ================declare =============
 declare -i time_stop_s=$(date +%s)
